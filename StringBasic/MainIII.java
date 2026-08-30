@@ -366,4 +366,173 @@ public class MainIII {
             System.out.print(str.charAt(i) + " = " + count + "," + " ");
         }
     }
+
+    /* 25. Find the Maximum Occurring Character */
+    public static char maxOccurringCharacter(String str){
+        char ch[] = str.toCharArray();
+        int max = 0;
+        char res = ' ';
+
+        if(res==' '){
+            return '\0';
+        }
+
+        for(int i=0;i<ch.length;i++){
+            
+            int count = 1;
+            
+            // Handle Duplicate
+            boolean isVisible = false;
+            for(int j=0;j<i;j++){
+                if(ch[i]==ch[j]){
+                    isVisible = true;
+                    break;
+                }
+            }
+
+            if(isVisible) continue;
+        
+            // Duplicate Count
+            for(int k=i+1;k<ch.length;k++){
+                if(ch[i]==ch[k]){
+                    count++;
+                    if(count>max){
+                        max = count;
+                        res = ch[i];
+                    }
+                }
+            }
+        }
+
+        // Check if max == 0 the print first index element
+        if(max == 0){
+            return ch[0];
+        }
+
+        return res;
+    }
+
+    /* 26. Check if Two Strings are Equal Without Using equals() */
+    public static boolean areStringsEqual(String str1, String str2){
+        char ch1[] = str1.toCharArray();
+        char ch2[] = str2.toCharArray();
+        Arrays.sort(ch1);
+        Arrays.sort(ch2);
+
+        int n = ch1.length;
+        int m = ch2.length;
+
+        //Base Case
+        if(n!=m){
+            return false;
+        }
+
+        for(int i=0;i<n&&i<m;i++){
+            if(ch1[i]!=ch2[i]){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /* 27. Find Length of the Longest Word */
+    public static int longestWordLength(String str){
+        int n = str.length();
+
+        // Edge Case
+        if(n<1){
+            return 0;
+        }
+
+        int count = 0;
+        int max = 0;
+
+        for(int i=0;i<n;i++){
+            char ch = str.charAt(i);
+
+            if(ch!=' '){
+                count++;
+            }
+            else{
+                if(count>max){
+                    max = count;
+                }
+                count = 0;
+            }
+        }
+
+        if(count>max){
+            max = count;
+        }
+
+        return max;
+    }
+
+    /* 28. Reverse the Entire String Without Using StringBuilder.reverse() */
+    public static String reverseString1(String str){
+        int n = str.length();
+        String rev = "";
+
+        for(int i=n-1;i>=0;i--){
+            char ch = str.charAt(i);
+            rev += ch;
+        }
+
+        return rev;
+    }
+
+    /* 29. Check Palindrome Without Reversing the String */
+    public static boolean isPalindrome1(String str){
+        int left = 0;
+        int right = str.length()-1;
+
+        while(left<right){
+            char ch1 = str.charAt(left);
+            char ch2 = str.charAt(right);
+
+            if(ch1!=ch2){
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    /* 30 Count Occurrences of Each Word */
+    public static void countWordFrequency(String str){
+
+        if(str.length()==0){
+            System.out.println("No Output");
+            return;
+        }
+
+        String arr[] = str.split(" ");
+        int n = arr.length;
+
+        for(int i=0;i<n;i++){
+            int count = 1;
+            boolean isVisible = false;
+            for(int j=0;j<i;j++){
+                if(arr[i].equals(arr[j])){
+                    isVisible = true;
+                    break;
+                }
+            }
+
+            if(isVisible) continue;
+
+            for(int k=i+1;k<n;k++){
+                if(arr[i].equals(arr[k])){
+                    count++;
+                }
+            }
+
+            System.out.print(arr[i] + " = " + count + "," + " ");
+            
+        }
+    }
 }
